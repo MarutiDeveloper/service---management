@@ -1,46 +1,45 @@
 @extends('frontend.layouts.main')
 
 @section('main-container')
-<main class="main">
-    <div class="page-title accent-background">
-        <div class="container d-lg-flex justify-content-between align-items-center">
-            <h1 class="mb-2 mb-lg-0">About</h1>
-            <nav class="breadcrumbs">
-                <ol>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="current">About</li>
-                </ol>
-            </nav>
+
+  <!-- about section -->
+
+  <section class="about_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          About <span>WhatsApp Chatbot</span>
+        </h2>
+        <p>
+          Revolutionize customer engagement with AI-driven WhatsApp chatbot solutions for businesses.
+        </p>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="img-box">
+            <img src="{{url('frontend-2/images/about-img.png')}}" alt="WhatsApp Chatbot">
+          </div>
         </div>
+        <div class="col-md-6">
+          <div class="detail-box">
+            <h3>
+              Smart & Automated Business Communication
+            </h3>
+            <p>
+              Our WhatsApp Chatbot enhances customer interaction by automating responses, handling inquiries, and improving user experience with 24/7 availability.
+            </p>
+            <p>
+              From customer support to order tracking and appointment scheduling, our chatbot seamlessly integrates with your business, ensuring efficiency and real-time engagement.
+            </p>
+            <a href="">
+              Learn More
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <section id="about" class="about section">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- Image Section -->
-                <div class="col-lg-6" data-aos="zoom-out" data-aos-delay="200">
-                    <img src="{{ asset($about->image ?? 'assets/img/default-about.jpg') }}" 
-                         alt="About Software Company" 
-                         class="img-fluid about-image">
-                </div>
+  <!-- end about section -->
 
-                <!-- Content Section -->
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <h2 class="inner-title">{{ $about->title ?? 'No Data Available' }}</h2>
-                    <p>{{ $about->description ?? 'Please add content from the admin panel.' }}</p>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-
-<!-- Custom CSS for Image Size -->
-<style>
-    .about-image {
-        width: 100%; /* Adjust this as needed */
-        height: 400px; /* Set desired height */
-        object-fit: cover; /* Ensure proper cropping */
-        border-radius: 10px; /* Optional: Add rounded corners */
-    }
-</style>
 @endsection
