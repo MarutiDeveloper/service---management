@@ -108,7 +108,30 @@ class FooterController extends Controller
      */
     public function destroy(string $id)
     {
-        $company = Companyinfo::findOrFail($id);
+        $company = CompanyinfoTF"<li class="nav-item">
+    @auth
+        @if (Auth::user()->role == 'customer')
+            <!-- My Account Dropdown -->
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} ({{ Auth::user()->email }})
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ route('account.profile') }}">My Account</a>
+                    <a class="dropdown-item" href="{{ route('account.logout') }}">Logout</a>
+                </div>
+            </li>
+        @endif
+    @else
+        <!-- Login / Sign Up Link -->
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('account.login') }}">
+                <i class="fa fa-sign-in" aria-hidden="true"></i> Login / Sign Up
+            </a>
+        </li>
+    @endauth
+</li>
+cfv\gtp::findOrFail($id);
         $company->delete();
 
         // Redirect with success message

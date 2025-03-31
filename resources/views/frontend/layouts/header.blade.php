@@ -22,7 +22,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
 
   <!--owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
   <link href="{{url('frontend-2/css/font-awesome.min.css')}}" rel="stylesheet" />
@@ -33,7 +34,6 @@
   <link href="{{url('frontend-2/css/responsive.css')}}" rel="stylesheet" />
 
   <style>
-
     /* Custom styling for title */
     .navbar-brand {
       display: flex;
@@ -41,15 +41,20 @@
     }
 
     .navbar-brand img {
-      max-height: 50px; /* Adjust the height of the logo */
-      margin-right: 10px; /* Space between logo and title */
+      max-height: 50px;
+      /* Adjust the height of the logo */
+      margin-right: 10px;
+      /* Space between logo and title */
     }
 
     /* Custom styling for title */
     .navbar-brand span {
-      font-size: 28px; /* Adjust the size of the title */
-      font-weight: 700; /* Make it bold */
-      color: #fff; /* White text for contrast */
+      font-size: 28px;
+      /* Adjust the size of the title */
+      font-weight: 700;
+      /* Make it bold */
+      color: #fff;
+      /* White text for contrast */
       text-transform: uppercase;
     }
 
@@ -63,24 +68,24 @@
       border-radius: 5px;
       z-index: 1000;
     }
-  
+
     .dropdown-menu a {
       color: #333;
       padding: 10px 15px;
       display: block;
       text-decoration: none;
     }
-  
+
     .dropdown-menu a:hover {
       background-color: #f8f9fa;
     }
-  
+
     /* Show dropdown on hover */
     .nav-item.dropdown:hover .dropdown-menu {
       display: block;
     }
   </style>
-  
+
 
 </head>
 
@@ -102,39 +107,56 @@
             <img src="{{ url('frontend-2/images/logo.jpg') }}" alt="Logo"> <!-- Add Your Logo Here -->
 
             <span>
-                Service Management
+              Service Management
             </span>
           </a>
 
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
           </button>
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav  ">
+            <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="{{url('/')}}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url('/about')}}"> About</a>
+                <a class="nav-link" href="{{ url('/about') }}">About</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="{{url('/service')}}">Services</a>
+                <a class="nav-link" href="{{ url('/service') }}">Services</a>
                 <ul class="dropdown-menu">
-                  <li><a href="{{url('/whatsapp-chatbot')}}">WhatsApp Chatbot</a></li>
-                  <li><a href="{{url('/business-automation')}}">Business Automation</a></li>
+                  <li><a href="{{ url('/whatsapp-chatbot') }}">WhatsApp Chatbot</a></li>
+                  <li><a href="{{ url('/business-automation') }}">Business Automation</a></li>
                 </ul>
               </li>
-                <li class="nav-item">
-                <a class="nav-link" href="{{url('/why')}}">Why Us</a>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url('/why') }}">Why Us</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{url('/team')}}">Team</a>
+                <a class="nav-link" href="{{ url('/team') }}">Team</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
-              </li>
-              
+
+              @if(Auth::check())
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="accountDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user"></i> My Account
+          </a>
+          <div class="dropdown-menu" aria-labelledby="accountDropdown">
+            <a class="dropdown-item" href="{{ route('account.profile') }}">Profile</a>
+            <a class="dropdown-item" href="{{ route('account.logout') }}">Logout</a>
+          </div>
+          </li>
+        @else
+        <li class="nav-item">
+        <a class="nav-link" href="{{ route('account.login') }}">
+          <i class="fa fa-user"></i> Login
+        </a>
+        </li>
+      @endif
+
             </ul>
           </div>
         </nav>

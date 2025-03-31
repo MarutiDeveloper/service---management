@@ -15,13 +15,14 @@ use App\Http\Controllers\Frontend\AboutController;
 use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\WhatsappChatbotController;
 use App\Http\Controllers\Frontend\BusinessAutomationController;
+use App\Http\Controllers\Frontend\Logincontroller;
 
 
 
 // ------------------------------------
 // Frontend Routes
 // ------------------------------------
-Route::get('/',[HomeController::class,'index']);
+Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index']);
 
 Route::get('/service',[ServiceController::class,'index']);
@@ -31,6 +32,11 @@ Route::get('/team',[TeamController::class,'index']);
 Route::get('/why',[WhyController::class,'index']);
 Route::get('/business-automation',[BusinessAutomationController::class,'index']);
 Route::get('/whatsapp-chatbot',[WhatsappChatbotController::class,'index']);
+Route::get('frontend/login', [Logincontroller::class, 'login'])->name('account.login');
+Route::post('frontend/login', [Logincontroller::class, 'authenticate'])->name('account.authenticate');
+Route::get('frontend/register', [Logincontroller::class, 'register'])->name('account.register');
+Route::get('frontend/profile', [Logincontroller::class, 'profile'])->name('account.profile');
+Route::get('frontend/logout', [Logincontroller::class, 'logout'])->name('account.logout');
 
 
 //Route::get('/blog', [BlogController::class, 'index']);
