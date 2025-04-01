@@ -18,43 +18,31 @@ class AdminLoginController extends Controller
 
     public function authenticate(Request $request)
     {
-        // Allowed email domains for customers
-        $allowedDomains = ['gmail.com', 'outlook.com', 'hotmail.com'];
-
         // Validate input
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if ($validator->fails()) {
-            return redirect()->route('admin.login')
-                ->withErrors($validator)
-                ->withInput($request->only('email'));
-        }
+        if ($validator->passes()) {
+            if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-        // Attempt authentication
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
-            $user = Auth::user();
+                $admin = Auth::guard('admin')->user();
+                if ($admin->role == 'Admin') {
+                    return redirect()->route('admin.dashboard');
+                } else {
 
-            // Apply domain check only if the user is a "customer"
-            if ($user->role === 'customer') {
-                $emailDomain = substr(strrchr($request->email, "@"), 1);
-                if (!in_array($emailDomain, $allowedDomains)) {
-                    Auth::logout(); // Logout the customer if the domain is not allowed
-                    return redirect()->route('admin.login')->with('error', 'Only Gmail, Outlook, or Hotmail users can log in as customers.');
+                    Auth::guard('admin')->logout();
+                    return redirect()->route('admin.login')->with('error', 'You are not authorize to access Admin Panel');
                 }
-            }
 
-            // Redirect users based on role
-            if ($user->role === 'Admin') {
-                return redirect()->route('admin.dashboard'); // Admin dashboard
             } else {
-                return redirect()->route('home'); // Customer home page
+                return redirect()->route('admin.login')->with('error', 'Either Email/Password is incorrect');
             }
+        } else {
+            return redirect()->route('admin.login')
+                ->withErrors($validator)->withInput($request->only('email'));
         }
-
-        return redirect()->route('admin.login')->with('error', 'Invalid Email or Password.');
     }
 
     public function registerUsers(Request $request)

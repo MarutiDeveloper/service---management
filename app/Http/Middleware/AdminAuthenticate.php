@@ -22,4 +22,5 @@ class AdminAuthenticate extends Middleware
         }
         $this->unauthenticated($request, ['admin']);
     }
+    
 }

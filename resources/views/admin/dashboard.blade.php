@@ -41,9 +41,9 @@
                     <div class="card border-0 shadow-lg rounded-lg text-center p-3 bg-light">
                         <div class="card-body">
                             <i class="fas fa-users fa-3x text-primary"></i>
-                            <h3 class="mt-2">{{ $totalEmployees }}</h3>
+                            <h3 class="mt-2">#</h3>
                             <p class="text-muted">Total Employees</p>
-                            <a href="{{route('admin.employee.index')}}" class="btn btn-outline-primary btn-sm">View
+                            <a href="#" class="btn btn-outline-primary btn-sm">View
                                 Details</a>
                         </div>
                     </div>
@@ -53,9 +53,9 @@
                     <div class="card border-0 shadow-lg rounded-lg text-center p-3 bg-light">
                         <div class="card-body">
                             <i class="fas fa-building fa-3x text-success"></i>
-                            <h3 class="mt-2">{{ $totalCompanies }}</h3>
+                            <h3 class="mt-2">#</h3>
                             <p class="text-muted">Total Companies</p>
-                            <a href="{{ route('admin.company.profile') }}" class="btn btn-outline-success btn-sm">View
+                            <a href="#" class="btn btn-outline-success btn-sm">View
                                 Details</a>
                         </div>
                     </div>
@@ -65,9 +65,9 @@
                     <div class="card border-0 shadow-lg rounded-lg text-center p-3 bg-light">
                         <div class="card-body">
                             <i class="fas fa-code-branch fa-3x text-warning"></i>
-                            <h3 class="mt-2">{{ $totalBranches }}</h3>
+                            <h3 class="mt-2">#</h3>
                             <p class="text-muted">Total Branches</p>
-                            <a href="{{ route('admin.branches.index') }}" class="btn btn-outline-warning btn-sm">View
+                            <a href="#" class="btn btn-outline-warning btn-sm">View
                                 Details</a>
                         </div>
                     </div>
@@ -81,54 +81,5 @@
 @endsection
 
 @section('customJs')
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var ctx = document.getElementById('companyGrowthChart').getContext('2d');
-            var companyGrowthChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: @json($growthMonths),
-                    datasets: [{
-                        label: 'Companies Created',
-                        data: @json($growthCounts),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        borderWidth: 2,
-                        pointRadius: 5,
-                        pointHoverRadius: 8,
-                        fill: true
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#000',
-                                font: {
-                                    size: 14
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            ticks: {
-                                color: "#000",
-                                font: { size: 12 }
-                            }
-                        },
-                        y: {
-                            ticks: {
-                                color: "#000",
-                                font: { size: 12 }
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
+  
 @endsection

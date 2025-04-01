@@ -50,7 +50,8 @@
             Info
           </h4>
           <p>
-            necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful
+            necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin
+            words, combined with a handful
           </p>
         </div>
       </div>
@@ -75,6 +76,9 @@
             <a class="" href="team.html">
               Team
             </a>
+            <a href="{{ route('home.clearCache') }}" class="footer-link">
+              <i class="fas fa-recycle"></i>&nbsp; Clear/Re-sett
+            </a>
           </div>
         </div>
       </div>
@@ -98,30 +102,32 @@
 
 <!-- footer section -->
 <section class="footer_section">
-    <div class="container">
-      <p>
-        &copy; <span id="displayYear"></span> All Rights Reserved By Service Management
-              </p>
-    </div>
-  </section>
-  <!-- footer section -->
+  <div class="container">
+    <p>
+      &copy; <span id="displayYear"></span> All Rights Reserved By Service Management
+    </p>
+  </div>
+</section>
+<!-- footer section -->
 
-  <!-- jQery -->
-  <script type="text/javascript" src="{{url('frontend-2/js/jquery-3.4.1.min.js')}}"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+<!-- jQery -->
+<script type="text/javascript" src="{{url('frontend-2/js/jquery-3.4.1.min.js')}}"></script>
+<!-- popper js -->
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
   </script>
-  <!-- bootstrap js -->
-  <script type="text/javascript" src="{{url('frontend-2/js/bootstrap.js')}}"></script>
-  <!-- owl slider -->
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
-  </script>
-  <!-- custom js -->
-  <script type="text/javascript" src="{{url('frontend-2/js/custom.js')}}"></script>
-  <!-- Google Map -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
-  </script>
-  <!-- End Google Map -->
+<!-- bootstrap js -->
+<script type="text/javascript" src="{{url('frontend-2/js/bootstrap.js')}}"></script>
+<!-- owl slider -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+</script>
+<!-- custom js -->
+<script type="text/javascript" src="{{url('frontend-2/js/custom.js')}}"></script>
+<!-- Google Map -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+</script>
+<!-- End Google Map -->
+@yield('customJs')
 
 </body>
 

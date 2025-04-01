@@ -20,8 +20,26 @@ use App\Http\Controllers\Frontend\Logincontroller;
 
 
 // ------------------------------------
+// Optimize Clear Route (for Development)
+// ------------------------------------
+Route::get('/optimize-clear', function () {
+    Artisan::call('optimize:clear');
+    return response()->json(['message' => 'Optimization cache cleared successfully.']);
+});
+// ------------------------------------
 // Frontend Routes
 // ------------------------------------
+// Route for clearing cache
+Route::get('/clear-cache', [HomeController::class, 'clearCache'])->name('home.clearCache');
+Route::group(['prefix' => 'account'], function () {
+    Route::group(['middleware' => 'guest'], function () {
+        Route::get('/login', [Logincontroller::class, 'login'])->name('account.login');
+        Route::post('/login', [Logincontroller::class, 'authenticate'])->name('account.authenticate');
+        Route::get('/register', [Logincontroller::class, 'register'])->name('account.register');
+        Route::post('/process-register', [Logincontroller::class, 'processRegister'])->name('account.processRegister');
+    });
+});
+
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index']);
 
@@ -32,11 +50,17 @@ Route::get('/team',[TeamController::class,'index']);
 Route::get('/why',[WhyController::class,'index']);
 Route::get('/business-automation',[BusinessAutomationController::class,'index']);
 Route::get('/whatsapp-chatbot',[WhatsappChatbotController::class,'index']);
-Route::get('frontend/login', [Logincontroller::class, 'login'])->name('account.login');
-Route::post('frontend/login', [Logincontroller::class, 'authenticate'])->name('account.authenticate');
-Route::get('frontend/register', [Logincontroller::class, 'register'])->name('account.register');
+// Route::get('frontend/login', [Logincontroller::class, 'login'])->name('account.login');
+// Route::post('frontend/login', [Logincontroller::class, 'authenticate'])->name('account.authenticate');
+// Route::get('frontend/register', [Logincontroller::class, 'register'])->name('account.register');
 Route::get('frontend/profile', [Logincontroller::class, 'profile'])->name('account.profile');
 Route::get('frontend/logout', [Logincontroller::class, 'logout'])->name('account.logout');
+// Route::post('/process-register', [Logincontroller::class, 'processRegister'])->name('account.processRegister');
+Route::get('/change-password', [Logincontroller::class, 'showChangePasswordForm'])->name('account.changePassword');
+Route::post('/process-change-password', [AuthController::class, 'changePassword'])->name('account.processChangePassword');
+Route::post('/update-profile', [AuthController::class, 'updateProfile'])->name('account.updateProfile');
+Route::post('/update-address', [AuthController::class, 'updateAddress'])->name('account.updateAddress');
+
 
 
 //Route::get('/blog', [BlogController::class, 'index']);
@@ -82,9 +106,9 @@ Route::prefix('admin')->group(function () {
     // ------------------------------------
     // Admin Guest Routes (For Login/Registration)
     // ------------------------------------
-    Route::middleware(['admin.guest'])->group(function () {
-        Route::get('/registration', [AdminLoginController::class, 'registration'])->name('admin.registration');
-        Route::post('/register-users', [AdminLoginController::class, 'registerUsers'])->name('admin.registerUsers');
+    Route::group(['middleware' => 'admin.guest'], function () {
+        Route::get('/Registration', [AdminLoginController::class, 'registration'])->name('admin.registration');
+        Route::post('/register-users',[AdminLoginController::class, 'registerUsers'])->name('admin.registerUsers');
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     });

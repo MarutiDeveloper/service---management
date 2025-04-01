@@ -50,7 +50,7 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->phone = $request->phone;
             $user->password = Hash::make($request->password);
-            $user->status = $request->status;
+            $user->role = $request->role;
             $user->save();
 
             $message = 'You have Successfully Created New User';

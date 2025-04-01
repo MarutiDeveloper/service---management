@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\ResetPasswordEmail;
 use App\Models\City;
 use App\Models\Country;
+use App\Models\CustomerAddress;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Wishlist;
@@ -101,9 +102,7 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->filled('remember'))) {
             // The user is authenticated, perform necessary actions here
 
-            if (session()->has('url.intended')) {
-                return redirect(session()->get('url.intended'));
-            }
+           
 
             return redirect()->route('account.profile');
         } else {
@@ -171,10 +170,10 @@ class AuthController extends Controller
             'last_name' => 'required|min:3',
             'email' => 'required|email|unique:users,email,' . $userId, // Ensures email is unique except for the current user
             'country_id' => 'required|exists:countries,id', // Validates that the country exists in the countries table
+            'state_id' => 'required|exists:countries,id', // Validates that the state exists in the States table    
+            'city_id' => 'required|exists:countries,id', // Validates that the state exists in the City table    
             'address' => 'required|min:10', // Reduced minimum character count for flexibility
-            'city' => 'required|min:3',
-            'state' => 'required|min:3',
-            'zip' => 'required|min:5|max:10', // Ensures valid ZIP length
+            'postal_code' => 'required|min:5|max:10', // Ensures valid ZIP length
             'mobile' => 'required|digits_between:10,15', // Ensures valid phone number
         ]);
 
@@ -187,14 +186,30 @@ class AuthController extends Controller
         }
 
         // Updating or creating the customer address
+        CustomerAddress::updateOrCreate(
+        ['user_id' => $userId],
+        [
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'country_id' => $request->country_id,
+            'state_id' => $request->state_id,
+            'city_id' => $request->city_id,
+            'address' => $request->address,
+            'apartment' => $request->apartment, // Ensure 'apartment' field is nullable in the database
+            'postal_code' => $request->postal_code,
+        ]
+        );
 
+    // Flash success message and return response
+    session()->flash('success', 'Address updated successfully.');
+    return response()->json([
+        'status' => true,
+        'message' => 'Address updated successfully.'
+    ]);
 
-        // Flash success message and return response
-        session()->flash('success', 'Address updated successfully.');
-        return response()->json([
-            'status' => true,
-            'message' => 'Address updated successfully.'
-        ]);
+      
     }
 
 

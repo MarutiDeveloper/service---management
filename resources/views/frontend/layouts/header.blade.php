@@ -27,6 +27,7 @@
 
   <!-- font awesome style -->
   <link href="{{url('frontend-2/css/font-awesome.min.css')}}" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- Custom styles for this template -->
   <link href="{{url('frontend-2/css/style.css')}}" rel="stylesheet" />

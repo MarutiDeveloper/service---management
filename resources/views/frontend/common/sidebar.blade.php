@@ -6,7 +6,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="#" class="nav-link font-weight-bold">
+        <a href="{{ route('account.changePassword') }}" class="nav-link font-weight-bold">
             <i class="fas fa-lock"></i> Change Password
         </a>
     </li>
