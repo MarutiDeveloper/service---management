@@ -52,13 +52,14 @@
                             </div>
                         </form>
                     </div>
+              
                     <div class="card mt-5">
                         <div class="card-header bg-dark text-white">
                             <h2 class="h5 mb-0 pt-2 pb-2">Address</h2>
                         </div>
                         <form action="" method="post" name="addressForm" id="addressForm">
                             @csrf
-                            @Method('PUT')
+                            
                             <div class="card-body p-4">
                                 <div class="row">
                                     <div class="col-md-6 mb-3">
@@ -83,6 +84,12 @@
                                         <label for="apartment">Apartment</label>
                                         <input type="text" name="apartment" id="apartment" class="form-control"
                                             value="{{ $address->apartment ?? '' }}" placeholder="Enter Your Apartment">
+                                        <p></p>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="email">Email</label>
+                                        <input type="email" name="email" id="email" class="form-control"
+                                            value="{{ $address->email ?? '' }}" placeholder="Enter Your E-mail">
                                         <p></p>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -236,6 +243,9 @@
                         }
                         if (errors.mobile) {
                             $("#mobile").addClass('is-invalid').siblings('p').html(errors.mobile).addClass('invalid-feedback');
+                        }
+                        if (errors.email) {
+                            $("#email").addClass('is-invalid').siblings('p').html(errors.email).addClass('invalid-feedback');
                         }
                         if (errors.address) {
                             $("#address").addClass('is-invalid').siblings('p').html(errors.address).addClass('invalid-feedback');

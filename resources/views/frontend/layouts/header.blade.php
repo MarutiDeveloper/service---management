@@ -126,10 +126,11 @@
                 <a class="nav-link" href="{{ url('/about') }}">About</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link" href="{{ url('/service') }}">Services</a>
+                <a class="nav-link" href="{{ url('/services') }}">Services</a>
                 <ul class="dropdown-menu">
                   <li><a href="{{ url('/whatsapp-chatbot') }}">WhatsApp Chatbot</a></li>
                   <li><a href="{{ url('/business-automation') }}">Business Automation</a></li>
+                  <li><a href="{{ route('customer.appointment.create') }}">Book Appoinment</a></li>
                 </ul>
               </li>
               <li class="nav-item">

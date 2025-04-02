@@ -42,7 +42,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.services.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Services</p>
                             </a>
@@ -59,6 +59,12 @@
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Hero Section</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ route('admin.appointments.index') }}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Booking Appoinment</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -89,7 +95,7 @@
 
                 <!-- Company Profile -->
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{route('admin.company-profile.index')}}" class="nav-link">
                         <i class="nav-icon fas fa-id-card"></i>
                         <p>Company Profile</p>
                     </a>

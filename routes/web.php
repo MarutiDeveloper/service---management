@@ -12,10 +12,13 @@ use App\Http\Controllers\Frontend\WhyController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\TeamController;
 use App\Http\Controllers\Frontend\AboutController;
-use App\Http\Controllers\Frontend\ServiceController;
 use App\Http\Controllers\Frontend\WhatsappChatbotController;
 use App\Http\Controllers\Frontend\BusinessAutomationController;
 use App\Http\Controllers\Frontend\Logincontroller;
+use App\Http\Controllers\CompanyProfileController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\CustomerAppointmentController;
+use App\Http\Controllers\Admin\AdminAppointmentController;
 
 
 
@@ -40,10 +43,32 @@ Route::group(['prefix' => 'account'], function () {
     });
 });
 
+Route::prefix('admin')->group(function() {
+    Route::get('company-profile', [CompanyProfileController::class, 'index'])->name('admin.company-profile.index');
+    Route::post('company-profile', [CompanyProfileController::class, 'update'])->name('admin.company-profile.update');
+});
+
+
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index']);
 
-Route::get('/service',[ServiceController::class,'index']);
+Route::prefix('admin')->group(function() {
+    // Admin routes for managing services
+    Route::get('services', [ServiceController::class, 'adminIndex'])->name('admin.services.index');
+    Route::get('services/create', [ServiceController::class, 'create'])->name('admin.services.create');
+    Route::post('services', [ServiceController::class, 'store'])->name('admin.services.store');
+    Route::get('services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    Route::put('services/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
+    Route::delete('services/{id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+});
+
+Route::prefix('customer')->group(function () {
+    Route::get('appointment', [CustomerAppointmentController::class, 'create'])->name('customer.appointment.create');
+    Route::post('appointment', [CustomerAppointmentController::class, 'store'])->name('customer.appointment.store');
+});
+
+// Frontend route for displaying services
+Route::get('services', [ServiceController::class, 'index'])->name('frontend.services.index');
 
 Route::get('/team',[TeamController::class,'index']);
 
@@ -100,6 +125,16 @@ Route::get('/optimize-clear', function () {
 // ------------------------------------
 // Admin Panel Routes
 // ------------------------------------
+// Route::prefix('admin')->group(function() {
+//     // Admin routes for managing services
+//     Route::get('services', [ServiceController::class, 'adminIndex'])->name('admin.services.index');
+//     Route::get('services/create', [ServiceController::class, 'create'])->name('admin.services.create');
+//     Route::post('services', [ServiceController::class, 'store'])->name('admin.services.store');
+//     Route::get('services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+//     Route::put('services/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
+//     Route::delete('services/{id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+// });
+
 
 Route::prefix('admin')->group(function () {
 
@@ -112,6 +147,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     });
+
+    Route::get('appointments', [AdminAppointmentController::class, 'index'])->name('admin.appointments.index');
+     // Admin routes for managing services
+    //  Route::get('services', [ServiceController::class, 'adminIndex'])->name('admin.services.index');
+    //  Route::get('services/create', [ServiceController::class, 'create'])->name('admin.services.create');
+    //  Route::post('services', [ServiceController::class, 'store'])->name('admin.services.store');
+    //  Route::get('services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+    //  Route::put('services/{id}', [ServiceController::class, 'update'])->name('admin.services.update');
+    //  Route::delete('services/{id}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
     // ------------------------------------
     // Admin Authenticated Routes (After Login)
