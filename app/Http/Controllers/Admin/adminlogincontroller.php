@@ -5,27 +5,30 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
-class adminlogincontroller extends Controller
+class AdminLoginController extends Controller
 {
     public function index()
     {
         return view('admin.login');
     }
+
     public function authenticate(Request $request)
     {
-
+        // Validate input
         $validator = Validator::make($request->all(), [
-            'email' => 'required |email',
-            'password' => 'required'
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
         if ($validator->passes()) {
             if (Auth::guard('admin')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
                 $admin = Auth::guard('admin')->user();
-                if ($admin->role == 2) {
+                if ($admin->role == 'Admin') {
                     return redirect()->route('admin.dashboard');
                 } else {
 
@@ -40,37 +43,48 @@ class adminlogincontroller extends Controller
             return redirect()->route('admin.login')
                 ->withErrors($validator)->withInput($request->only('email'));
         }
-
-    }
-    public function registration()
-    {
-        return view('admin.registration');
     }
 
     public function registerUsers(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|min:5|max:12',
-            'role' => 'required|in:1,2',  // Ensure role is either 1 or 2
-        ]);
-        // Create a new user instance
-        $user = new User();
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->role = $request->role;
-        $user->password = Hash::make($request->password);  // Hash the password
-        // Save the user to the database
-        $res = $user->save();
+        // Allowed email domains for customers
+        $allowedDomains = ['gmail.com', 'outlook.com', 'hotmail.com'];
 
-        // Optional: Check if the user was saved and return a response
-        if ($res) {
-            return redirect()->back()->with('success', 'User registered successfully');
-        } else {
-            return redirect()->back()->with('fail', 'Registration failed, try again');
+        // Validate input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|min:5|max:12',
+            'role' => 'required|in:customer,Admin',  // Restrict role to "customer" or "Admin"
+        ]);
+
+        // If role is "customer", apply domain restriction
+        if ($request->role === 'customer') {
+            $emailDomain = substr(strrchr($request->email, "@"), 1);
+            if (!in_array($emailDomain, $allowedDomains)) {
+                return redirect()->back()->with('fail', 'Only Gmail, Outlook, or Hotmail users can register as customers.');
+            }
         }
 
+        // Create and save the user
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role' => $request->role,
+            'password' => Hash::make($request->password), // Secure password hashing
+        ]);
+
+        // Check if the user was created successfully
+        if ($user->wasRecentlyCreated) {
+            return redirect()->back()->with('success', 'User registered successfully.');
+        } else {
+            return redirect()->back()->with('fail', 'User registration failed.');
+        }
     }
 
+
+    public function registration()
+    {
+        return view('admin.registration');
+    }
 }
