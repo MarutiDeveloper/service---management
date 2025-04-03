@@ -28,14 +28,20 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <a href="{{route('admin.why.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Why</p>
+                            </a>
+                        </li>
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Blogs</p>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{route('admin.team.index')}}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Team</p>
                             </a>
@@ -48,19 +54,19 @@
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Testimonials</p>
                             </a>
-                        </li>
+                        </li> -->
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Hero Section</p>
                             </a>
-                        </li>
+                        </li> -->
                         <li class="nav-item">
                             <a href="{{ route('admin.appointments.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -116,7 +122,7 @@
                     </a>
                 </li>
 
-            
+
                 <!-- Messages -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">
