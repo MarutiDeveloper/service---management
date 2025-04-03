@@ -19,6 +19,8 @@ use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerAppointmentController;
 use App\Http\Controllers\Admin\AdminAppointmentController;
+use App\Http\Controllers\Admin\WhySectionController;
+use App\Http\Controllers\Admin\TeamController as AdminTeamController;
 
 
 
@@ -47,6 +49,25 @@ Route::prefix('admin')->group(function() {
     Route::get('company-profile', [CompanyProfileController::class, 'index'])->name('admin.company-profile.index');
     Route::post('company-profile', [CompanyProfileController::class, 'update'])->name('admin.company-profile.update');
 });
+    //Route for displaying the Why section
+Route::get('/why',[WhyController::class,'index']);
+Route::prefix('admin')->group(function () {
+    Route::get('/why', [WhySectionController::class, 'index'])->name('admin.why.index');
+    Route::get('/why/create', [WhySectionController::class, 'create'])->name('admin.why.create');
+    Route::post('/why/store', [WhySectionController::class, 'store'])->name('admin.why.store');
+});
+Route::get('/admin/why/edit/{id}', [WhySectionController::class, 'edit'])->name('admin.why.edit');
+Route::put('/admin/why/update/{id}', [WhySectionController::class, 'update'])->name('admin.why.update');
+Route::delete('/admin/why/destroy/{id}', [WhySectionController::class, 'destroy'])->name('admin.why.destroy');
+
+Route::get('/team',[TeamController::class,'index']);
+// Admin routes to manage team members
+Route::get('/admin/teams', [AdminTeamController::class, 'index'])->name('admin.team.index');
+Route::get('/admin/teams/create', [AdminTeamController::class, 'create'])->name('admin.team.create');
+Route::post('/admin/teams', [AdminTeamController::class, 'store'])->name('admin.team.store');
+Route::get('/admin/teams/{id}/edit', [AdminTeamController::class, 'edit'])->name('admin.team.edit');
+Route::put('/admin/teams/{id}', [AdminTeamController::class, 'update'])->name('admin.team.update');
+Route::delete('/admin/teams/{id}', [AdminTeamController::class, 'destroy'])->name('admin.team.destroy');
 
 
 Route::get('/',[HomeController::class,'index'])->name('home');
