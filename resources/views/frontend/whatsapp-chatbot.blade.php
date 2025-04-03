@@ -6,7 +6,7 @@
         <p class="text-center">Enhance your business communication with AI-powered WhatsApp chatbots.</p>
         
         <div class="text-center">
-            <img src="{{ url('frontend/images/chatbot.png') }}" alt="WhatsApp Chatbot" class="img-fluid" style="max-width: 300px;">
+            <img src="{{ url('frontend-2/images/chatbot.png') }}" alt="WhatsApp Chatbot" class="img-fluid" style="max-width: 300px;">
         </div>
         
         <div class="mt-4">

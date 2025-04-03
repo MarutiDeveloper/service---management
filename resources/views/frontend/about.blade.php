@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="img-box">
-            <img src="{{url('frontend/images/about-img.png')}}" alt="WhatsApp Chatbot">
+            <img src="{{url('frontend-2/images/about-img.png')}}" alt="WhatsApp Chatbot">
           </div>
         </div>
         <div class="col-md-6">
