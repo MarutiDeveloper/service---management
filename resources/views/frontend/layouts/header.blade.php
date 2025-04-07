@@ -11,12 +11,13 @@
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="author" content="" />
-  <link rel="shortcut icon" href="{{url('frontend-2/images/favicon.png')}}" type="">
+  <link rel="shortcut icon" href="{{ asset('assets/frontend-2/images/favicon.png')}}" type="">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <title> Service Management </title>
 
   <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="{{url('frontend-2/css/bootstrap.css')}}" />
+  <link rel="stylesheet" type="text/css" href="{{ asset('assets/frontend-2/css/bootstrap.css')}}" />
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
@@ -26,13 +27,15 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
 
   <!-- font awesome style -->
-  <link href="{{url('frontend-2/css/font-awesome.min.css')}}" rel="stylesheet" />
+  <link href="{{ asset('assets/frontend-2/css/font-awesome.min.css')}}" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
   <!-- Custom styles for this template -->
-  <link href="{{url('frontend-2/css/style.css')}}" rel="stylesheet" />
+  <link href="{{ asset('assets/frontend-2/css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
-  <link href="{{url('frontend-2/css/responsive.css')}}" rel="stylesheet" />
+  <link href="{{ asset('assets/frontend-2/css/responsive.css')}}" rel="stylesheet" />
+
+
 
   <style>
     /* Custom styling for title */
@@ -96,7 +99,7 @@
 
     <div class="hero_bg_box">
       <div class="bg_img_box">
-        <img src="{{url('frontend-2/images/hero-bg.png')}}" alt="">
+        <img src="{{ asset('assets/frontend-2/images/hero-bg.png')}}" alt="">
       </div>
     </div>
 
@@ -104,14 +107,14 @@
     <header class="header_section">
       <div class="container-fluid">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="{{url('/')}}">
-            <img src="{{ url('frontend-2/images/logo.jpg') }}" alt="Logo"> <!-- Add Your Logo Here -->
-
-            <span>
-              Service Management
-            </span>
+          <a class="navbar-brand" href="{{ url('/') }}">
+            @foreach ($companyProfile as $Profile)
+          @if(!empty($Profile->company_logo))
+        <img src="{{ asset('storage/' . $Profile->company_logo) }}" alt="Company Logo" style="max-height: 50px;">
+      @endif
+          <span>{{ $Profile->company_name }}</span>
           </a>
-
+        @endforeach
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class=""> </span>
@@ -120,7 +123,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav">
               <li class="nav-item active">
-                <a class="nav-link" href="{{ url('/') }}">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="{{ url('/') }}"> Home <span class="sr-only">(current)</span></a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="{{ url('/about') }}">About</a>

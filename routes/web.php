@@ -1,26 +1,28 @@
 <?php
-
-use App\Http\Controllers\Admin\FooterController;
+// ------------------------------------
+// Web Routes
+// ------------------------------------
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminHomeController;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\adminlogincontroller;
-use App\Http\Controllers\Frontend\WhyController;
-use App\Http\Controllers\Frontend\HomeController;
-use App\Http\Controllers\Frontend\TeamController;
-use App\Http\Controllers\Frontend\AboutController;
-use App\Http\Controllers\Frontend\WhatsappChatbotController;
-use App\Http\Controllers\Frontend\BusinessAutomationController;
-use App\Http\Controllers\Frontend\Logincontroller;
+use App\Http\Controllers\frontend\WhyController;
+use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\TeamController;
+use App\Http\Controllers\frontend\AboutController;
+use App\Http\Controllers\frontend\WhatsappChatbotController;
+use App\Http\Controllers\frontend\BusinessAutomationController;
+use App\Http\Controllers\frontend\Logincontroller;
 use App\Http\Controllers\CompanyProfileController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\CustomerAppointmentController;
 use App\Http\Controllers\Admin\AdminAppointmentController;
 use App\Http\Controllers\Admin\WhySectionController;
 use App\Http\Controllers\Admin\TeamController as AdminTeamController;
+use App\Http\Controllers\Admin\ClientController;
 
 
 
@@ -32,7 +34,7 @@ Route::get('/optimize-clear', function () {
     return response()->json(['message' => 'Optimization cache cleared successfully.']);
 });
 // ------------------------------------
-// Frontend Routes
+// frontend Routes
 // ------------------------------------
 // Route for clearing cache
 Route::get('/clear-cache', [HomeController::class, 'clearCache'])->name('home.clearCache');
@@ -48,6 +50,9 @@ Route::group(['prefix' => 'account'], function () {
 Route::prefix('admin')->group(function() {
     Route::get('company-profile', [CompanyProfileController::class, 'index'])->name('admin.company-profile.index');
     Route::post('company-profile', [CompanyProfileController::class, 'update'])->name('admin.company-profile.update');
+});
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('clients', ClientController::class);
 });
     //Route for displaying the Why section
 Route::get('/why',[WhyController::class,'index']);
@@ -88,7 +93,7 @@ Route::prefix('customer')->group(function () {
     Route::post('appointment', [CustomerAppointmentController::class, 'store'])->name('customer.appointment.store');
 });
 
-// Frontend route for displaying services
+// frontend route for displaying services
 Route::get('services', [ServiceController::class, 'index'])->name('frontend.services.index');
 
 Route::get('/team',[TeamController::class,'index']);
@@ -117,24 +122,8 @@ Route::post('/update-address', [AuthController::class, 'updateAddress'])->name('
 // ------------------------------------
 // Create - Footer Management Routes
 // ------------------------------------
-// Route to list Footer information
-Route::get('/admin/create_footer', [FooterController::class, 'index'])->name('admin.create_footer.index');
-// Route to Create Footer information
-Route::get('/admin/create_footer/create', [FooterController::class, 'create'])->name('admin.create_footer.create'); // Show form for creating
 
-// Route to Store Footer information
-Route::post('/admin/create_footer', [FooterController::class, 'store'])->name('admin.create_footer.store');        // Store new entry
-
-// Route to edit Footer information
-Route::get('/admin/create_footer/edit/{id}', [FooterController::class, 'edit'])->name('admin.create_footer.edit');
-
-// Route to update Footer information
-Route::put('/admin/create_footer/update/{id}', [FooterController::class, 'update'])->name('admin.create_footer.update');
-
-// Route to delete Footer information
-Route::delete('/admin/create_footer/destroy/{id}', [FooterController::class, 'destroy'])->name('admin.create_footer.destroy');
-
-// Frontend route
+// frontend route
 // ------------------------------------
 // Clear Cache Route (for Development)
 // ------------------------------------
@@ -168,6 +157,17 @@ Route::prefix('admin')->group(function () {
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     });
+    // ------------------------------------
+    // Admin routes for About Section
+    // ------------------------------------
+    Route::get('about', [AdminAboutController::class, 'index'])->name('admin.about.index');
+    Route::get('about/create', [AdminAboutController::class, 'create'])->name('admin.about.create');
+    Route::post('about/store', [AdminAboutController::class, 'store'])->name('admin.about.store');
+    Route::get('about/edit/{id}', [AdminAboutController::class, 'edit'])->name('admin.about.edit');
+    Route::put('about/update/{id}', [AdminAboutController::class, 'update'])->name('admin.about.update');
+    Route::delete('about/destroy/{id}', [AdminAboutController::class, 'destroy'])->name('admin.about.destroy');
+    // ------------------------------------
+    
 
     Route::get('appointments', [AdminAppointmentController::class, 'index'])->name('admin.appointments.index');
      // Admin routes for managing services

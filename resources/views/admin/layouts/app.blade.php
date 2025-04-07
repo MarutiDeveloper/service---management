@@ -9,19 +9,20 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('admin-assets/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/plugins/fontawesome-free/css/all.min.css') }}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('admin-assets/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <!-- <link rel="stylesheet" href="{{ asset('admin-assets/plugins/dropzone/min/dropzone.min.css') }}"> -->
     <!-- Summernote -->
-    <link rel="stylesheet" href="{{ asset('admin-assets/plugins/summernote/summernote.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/plugins/summernote/summernote.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('admin-assets/plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/plugins/select2/css/select2.min.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('admin-assets/css/datetimepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/css/datetimepicker.css') }}">
 
-    <link rel="stylesheet" href="{{ asset('admin-assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('./assets/admin-assets/css/custom.css') }}">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/dropzone.min.css">
@@ -46,7 +47,7 @@
                 <!-- Home link -->
                 <li class="nav-item">
                     <a href="{{ route('admin.dashboard') }}" class="nav-link home-link">
-                        <img src="{{ asset('admin-assets/img/home.ico') }}" alt="Home Icon"
+                        <img src="{{ asset('./assets/admin-assets/img/home.ico') }}" alt="Home Icon"
                             style="width: 20px; height: 20px; vertical-align: middle;">
                         <strong style="font-weight: bolder ;">Home</strong>
                     </a>
@@ -77,7 +78,7 @@
                 <!-- User dropdown -->
                 <li class="nav-item dropdown">
                     <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
-                        <img src="{{ asset('admin-assets/img/avatar5.png') }}" class="img-circle elevation-2" width="40"
+                        <img src="{{ asset('./assets/admin-assets/img/avatar5.png') }}" class="img-circle elevation-2" width="40"
                             height="40" alt="User Avatar">
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
@@ -130,23 +131,23 @@
     </div>
     <!-- ./wrapper -->
     <!-- jQuery -->
-    <script src="{{ asset('admin-assets/plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/plugins/jquery/jquery.min.js') }}"></script>
     <!-- Bootstrap 4 -->
-    <script src="{{ asset('admin-assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- AdminLTE App -->
-    <script src="{{ asset('admin-assets/js/adminlte.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/js/adminlte.min.js') }}"></script>
 
     <!-- Summernote -->
-    <script src="{{ asset('admin-assets/plugins/summernote/summernote.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/plugins/summernote/summernote.min.js') }}"></script>
 
-    <script src="{{ asset('admin-assets/plugins/select2/js/select2.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/plugins/select2/js/select2.min.js') }}"></script>
 
     <!-- AdminLTE for demo purposes -->
-    <script src="{{ asset('admin-assets/js/demo.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/js/demo.js') }}"></script>
 
-    <script src="{{ asset('admin-assets/js/datetimepicker.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/js/datetimepicker.js') }}"></script>
 
-    <script src="{{ asset('admin-assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
+    <script src="{{ asset('./assets/admin-assets/plugins/dropzone/min/dropzone.min.js') }}"></script>
 
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.9.3/min/dropzone.min.js"></script>   -->

@@ -6,7 +6,7 @@
         <p class="text-center">Automate your business processes and improve efficiency with cutting-edge automation solutions.</p>
         
         <div class="text-center">
-            <img src="{{ url('frontend-2/images/automation.jpg') }}" alt="Business Automation" class="img-fluid" style="max-width: 300px;">
+            <img src="{{ asset('assets/frontend-2/images/automation.jpg') }}" alt="Business Automation" class="img-fluid" style="max-width: 300px;">
         </div>
         
         <div class="mt-4">

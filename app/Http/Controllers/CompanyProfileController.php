@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\CompanyProfile;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+
 
 class CompanyProfileController extends Controller
 {
@@ -21,11 +22,11 @@ class CompanyProfileController extends Controller
 
     public function update(Request $request)
     {
-        // Get the current company profile, or return an error if not found
-        $companyProfile = CompanyProfile::first();
+        // Fetch or create the company profile
+        $companyProfile = CompanyProfile::first(); // Adjust according to your logic
 
         if (!$companyProfile) {
-            return redirect()->back()->with('error', 'Company profile not found.');
+            $companyProfile = new CompanyProfile(); // Create a new instance if none exists
         }
 
         // Validate the incoming request data
@@ -43,22 +44,20 @@ class CompanyProfileController extends Controller
             'social_media_links' => 'nullable|string',
         ]);
 
-        // Handle logo upload
-        if ($request->hasFile('logo')) {
-            // Delete old logo if exists
-            if ($companyProfile->logo) {
-                Storage::delete('public/' . $companyProfile->logo);
+        // Handle the company logo upload
+        if ($request->hasFile('company_logo')) {
+            // Delete the old logo if it exists
+            if ($companyProfile->company_logo) {
+                Storage::delete('public/' . $companyProfile->company_logo);
             }
 
-            // Store new logo in 'public/company_logos' directory
-            $logoPath = $request->file('logo')->store('Logos', 'public');
-            $companyProfile->logo = $logoPath;
+            // Save the new logo
+            $path = $request->file('company_logo')->store('company_logos', 'public');
+            $companyProfile->company_logo = $path;
         }
 
         // Update the rest of the company profile details
-        $companyProfile = new CompanyProfile();
         $companyProfile->company_name = $request->company_name;
-        $companyProfile->company_logo = $request->company_logo; // This will be the new path if uploaded
         $companyProfile->company_tagline = $request->company_tagline;
         $companyProfile->website_url = $request->website_url;
         $companyProfile->industry_type = $request->industry_type;
@@ -69,9 +68,10 @@ class CompanyProfileController extends Controller
         $companyProfile->office_address = $request->office_address;
         $companyProfile->social_media_links = $request->social_media_links;
 
-        // Save the updated company profile
+        // Save the updated profile
         $companyProfile->save();
 
         return redirect()->route('admin.company-profile.index')->with('success', 'Profile updated successfully!');
     }
 }
+

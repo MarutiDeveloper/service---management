@@ -21,7 +21,7 @@
                 <td>{{ $section->id }}</td>
                 <td>{{ $section->title }}</td>
                 <td>{{ $section->description }}</td>
-                <td><img src="{{ asset('storage/' . $section->image) }}" width="80"></td>
+                <td><img src="{{ asset('./assets/storage/' . $section->image) }}" width="80"></td>
                 <td>
                     <a href="{{ route('admin.why.edit', $section->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('admin.why.destroy', $section->id) }}" method="POST" style="display:inline;">

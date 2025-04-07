@@ -11,7 +11,7 @@
             @foreach($whySections as $section)
                 <div class="box">
                     <div class="img-box">
-                        <img src="{{ asset('storage/' . $section->image) }}" alt="">
+                        <img src="{{ asset('./assets/storage/' . $section->image) }}" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>{{ $section->title }}</h5>
