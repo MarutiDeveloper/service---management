@@ -25,7 +25,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $service->title }}</td>
                     <td>{{ $service->description }}</td>
-                    <td><img src="{{ asset('storage/' . $service->image) }}" width="100" alt="Service Image"></td>
+                    <td><img src="{{ asset('./assets/storage/' . $service->image) }}" width="100" alt="Service Image"></td>
                     <td>
                         <a href="{{ route('admin.services.edit', $service->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" style="display:inline;">

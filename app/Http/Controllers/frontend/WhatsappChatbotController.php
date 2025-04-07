@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
 
 class WhatsappChatbotController extends Controller
 {
     public function index()
     {
-        return view('frontend.whatsapp-chatbot');
+        $companyProfile = CompanyProfile::all(); // Retrieve the first profile
+        return view('frontend.whatsapp-chatbot', compact('companyProfile'));
     }
 }

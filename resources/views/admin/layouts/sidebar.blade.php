@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        <img src="{{ asset('admin-assets/img/Admin-Panel logo.jpg') }}" alt="Shopping-site logo"
+        <img src="{{ asset('./assets/admin-assets/img/Admin-Panel logo.jpg') }}" alt="Service Management Logo"
             class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light"
             style="font-family: Georgia, 'Times New Roman', Times, serif;">Admin-Panel</span>
@@ -53,6 +53,12 @@
                                 <p>Manage Services</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('admin.clients.index')}}" class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Manage Clients </p>
+                            </a>
+                        </li>
 
                         <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -73,22 +79,10 @@
                                 <p>Booking Appoinment</p>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="nav-icon fas fa-id-card"></i>
-                                <p>Manage Footer</p>
-                            </a>
-                        </li>
+                       
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Manage Company Logos</p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('admin.about.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage About</p>
                             </a>
@@ -115,43 +109,37 @@
             </a>
         </li> -->
                 <!-- Multiple Branch -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-code-branch"></i>
                         <p>Multiple Branch</p>
                     </a>
-                </li>
+                </li> -->
 
 
                 <!-- Messages -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Messages</p>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Users -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Employee</p>
                     </a>
-                </li>
+                </li> -->
                 <!-- Pages -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Pages</p>
                     </a>
-                </li>
-                <!-- Manage Footer -->
-                <!-- <li class="nav-item">
-            <a href="{{ route('admin.create_footer.index') }}" class="nav-link">
-                <i class="nav-icon fas fa-id-card"></i>
-                <p>Manage Footer</p>
-            </a>
-        </li> -->
+                </li> -->
+                
                 <!-- Cache Clear -->
                 <li class="nav-item">
                     <a href="#" class="nav-link">

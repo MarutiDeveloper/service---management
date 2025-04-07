@@ -4,12 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Appointment;
-
+use App\Models\CompanyProfile;
 class CustomerAppointmentController extends Controller
 {
     public function create()
     {
-        return view('frontend.customer.appointment');
+        $companyProfile = CompanyProfile::all(); // Retrieve the first profile
+        return view('frontend.customer.appointment', compact('companyProfile'));
     }
 
     public function store(Request $request)

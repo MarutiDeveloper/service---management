@@ -5,14 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
-
+use App\Models\CompanyProfile;
 class ServiceController extends Controller
 {
       // Frontend: Show all services
       public function index()
       {
           $services = Service::all();
-          return view('frontend.service', compact('services'));
+          $companyProfile = CompanyProfile::all(); // Retrieve the first profile
+          return view('frontend.service', compact('services', 'companyProfile'));
       }
   
       // Admin: Show all services (For managing services in the admin panel)
