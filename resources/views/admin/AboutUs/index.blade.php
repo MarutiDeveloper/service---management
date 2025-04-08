@@ -29,7 +29,7 @@
                         <td>{{ Str::limit($about->description, 100) }}</td>
                         <td>
                             @if($about->image)
-                                <img src="{{ asset('storage/' . $about->image) }}" alt="About Image" class="rounded-circle shadow"
+                                <img src="{{ asset($about->image) }}" alt="About Image" class="rounded-circle shadow"
                                     style="width: 80px; height: 80px; object-fit: cover;">
                             @else
                                 <span class="text-muted">No Image</span>

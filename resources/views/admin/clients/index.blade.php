@@ -22,7 +22,7 @@
                     <td>{{ $client->testimonial }}</td>
                     <td>
                         <!-- Display the client's image -->
-                        <img src="{{ asset('./images/clients/'.$client->image) }}" alt="{{ $client->name }}" width="50" height="50">
+                        <img src="{{ asset($client->image) }}" alt="{{ $client->name }}" width="50" height="50">
                     </td>
                     <td>
                         <a href="{{ route('admin.clients.edit', $client->id) }}" class="btn btn-warning">Edit</a>

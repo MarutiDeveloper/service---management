@@ -25,13 +25,20 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $service->title }}</td>
                     <td>{{ $service->description }}</td>
-                    <td><img src="{{ asset('./assets/storage/' . $service->image) }}" width="100" alt="Service Image"></td>
+                    <td>
+                        @if($service->image)
+                            <img src="{{ asset($service->image) }}" width="100" alt="Service Image">
+                        @else
+                            No Image
+                        @endif
+                    </td>
                     <td>
                         <a href="{{ route('admin.services.edit', $service->id) }}" class="btn btn-warning">Edit</a>
                         <form action="{{ route('admin.services.destroy', $service->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
+                            <button type="submit" class="btn btn-danger"
+                                onclick="return confirm('Are you sure?')">Delete</button>
                         </form>
                     </td>
                 </tr>

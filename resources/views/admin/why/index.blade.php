@@ -21,13 +21,19 @@
                 <td>{{ $section->id }}</td>
                 <td>{{ $section->title }}</td>
                 <td>{{ $section->description }}</td>
-                <td><img src="{{ asset('./assets/storage/' . $section->image) }}" width="80"></td>
+                <td>
+                    @if($section->image)
+                        <img src="{{ asset($section->image) }}" width="80">
+                    @else
+                        N/A
+                    @endif
+                </td>
                 <td>
                     <a href="{{ route('admin.why.edit', $section->id) }}" class="btn btn-warning btn-sm">Edit</a>
                     <form action="{{ route('admin.why.destroy', $section->id) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
                     </form>
                 </td>
             </tr>

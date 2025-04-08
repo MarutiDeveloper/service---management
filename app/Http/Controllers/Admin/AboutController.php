@@ -27,13 +27,13 @@ class AboutController extends Controller
         ]);
 
         // Store the image and get the path
-        $imagePath = $request->file('image')->store('team', 'public');
-
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/about'), $imageName);
         // Create the new team member
         Aboutus::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagePath,
+            'image' => $$request->image,
         ]);
 
         return redirect()->route('admin.about.index')->with('success', 'About Us Created successfully');
@@ -56,11 +56,15 @@ class AboutController extends Controller
 
         // Update the image if a new one is provided
         if ($request->hasFile('image')) {
-            // Store the new image and get the path
-            $imagePath = $request->file('image')->store('team', 'public');
-            $aboutus->image = $imagePath;
-        }
+            // Delete old image
+            if ($aboutus->image && file_exists(public_path($aboutus->image))) {
+                unlink(public_path($aboutus->image));
+            }
 
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/about'), $imageName);
+            $aboutus->image = 'uploads/about/' . $imageName;
+        }
         // Update other fields
         $aboutus->title = $request->title;
         $aboutus->description = $request->description;

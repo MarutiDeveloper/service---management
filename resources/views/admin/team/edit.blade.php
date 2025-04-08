@@ -22,7 +22,7 @@
             <label for="image">Image</label>
             <input type="file" name="image" id="image" class="form-control">
             @if ($team->image)
-                <img src="{{ asset('storage/' . $team->image) }}" alt="team-image" class="img-fluid mt-2" style="max-width: 200px;">
+                <img src="{{ asset($team->image) }}" alt="team-image" class="img-fluid mt-2" style="max-width: 200px;">
             @endif
         </div>
 

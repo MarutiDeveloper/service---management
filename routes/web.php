@@ -1,14 +1,14 @@
 <?php
-// ------------------------------------
-// Web Routes
-// ------------------------------------
+
+// app/Http/Controllers/web.php
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\AdminHomeController;
-use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\Admin\adminlogincontroller;
+use App\Http\Controllers\Admin\AboutController as AdminAboutController;
 use App\Http\Controllers\frontend\WhyController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\TeamController;
@@ -77,6 +77,19 @@ Route::delete('/admin/teams/{id}', [AdminTeamController::class, 'destroy'])->nam
 
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/about',[AboutController::class,'index']);
+
+Route::prefix('admin')->group(function () {
+	// ------------------------------------
+    // Admin routes for About Section
+    // ------------------------------------
+    Route::get('about', [AdminAboutController::class, 'index'])->name('admin.about.index');
+    Route::get('about/create', [AdminAboutController::class, 'create'])->name('admin.about.create');
+    Route::post('about/store', [AdminAboutController::class, 'store'])->name('admin.about.store');
+    Route::get('about/edit/{id}', [AdminAboutController::class, 'edit'])->name('admin.about.edit');
+    Route::put('about/update/{id}', [AdminAboutController::class, 'update'])->name('admin.about.update');
+    Route::delete('about/destroy/{id}', [AdminAboutController::class, 'destroy'])->name('admin.about.destroy');
+    // ------------------------------------
+});
 
 Route::prefix('admin')->group(function() {
     // Admin routes for managing services
@@ -157,17 +170,6 @@ Route::prefix('admin')->group(function () {
         Route::get('/login', [AdminLoginController::class, 'index'])->name('admin.login');
         Route::post('/authenticate', [AdminLoginController::class, 'authenticate'])->name('admin.authenticate');
     });
-    // ------------------------------------
-    // Admin routes for About Section
-    // ------------------------------------
-    Route::get('about', [AdminAboutController::class, 'index'])->name('admin.about.index');
-    Route::get('about/create', [AdminAboutController::class, 'create'])->name('admin.about.create');
-    Route::post('about/store', [AdminAboutController::class, 'store'])->name('admin.about.store');
-    Route::get('about/edit/{id}', [AdminAboutController::class, 'edit'])->name('admin.about.edit');
-    Route::put('about/update/{id}', [AdminAboutController::class, 'update'])->name('admin.about.update');
-    Route::delete('about/destroy/{id}', [AdminAboutController::class, 'destroy'])->name('admin.about.destroy');
-    // ------------------------------------
-    
 
     Route::get('appointments', [AdminAppointmentController::class, 'index'])->name('admin.appointments.index');
      // Admin routes for managing services

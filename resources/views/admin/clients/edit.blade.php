@@ -40,7 +40,7 @@
             <div>
                 <!-- Display existing image -->
                 @if ($client->image)
-                    <img src="{{ asset('./images/clients/'.$client->image) }}" alt="{{ $client->name }}" width="100" height="100">
+                    <img src="{{ asset($client->image) }}" alt="{{ $client->name }}" width="100" height="100">
                     <br>
                     <small>Current Image</small>
                 @endif

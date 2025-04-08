@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Country;
 use App\Models\States;
 use App\Models\City;
+use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -74,8 +75,8 @@ class Logincontroller extends Controller
         $countries = Country::orderBy('name', 'ASC')->get();
         $states = States::orderBy('name', 'ASC')->get();
         $city = City::orderBy('name', 'ASC')->get(); // Renamed to 'cities'
-    
-        return view('frontend.profile', compact('user', 'address', 'countries', 'city','states'));
+        $companyProfile = CompanyProfile::all();
+        return view('frontend.profile', compact('user', 'address', 'countries', 'city','states', 'companyProfile'));
     }
     public function logout(Request $request)
     {
@@ -143,7 +144,8 @@ class Logincontroller extends Controller
     }
     public function showChangePasswordForm()
     {
-        return view('frontend.change-password');
+        $companyProfile = CompanyProfile::all();
+        return view('frontend.change-password', compact('companyProfile'));
     }
     public function changePassword(Request $request)
     {

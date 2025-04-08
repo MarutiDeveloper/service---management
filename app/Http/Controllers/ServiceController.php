@@ -31,24 +31,25 @@ class ServiceController extends Controller
   
       // Admin: Store a new service
       public function store(Request $request)
-      {
-          $request->validate([
-              'title' => 'required|string|max:255',
-              'description' => 'required|string',
-              'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-          ]);
-  
-          // Handle the image upload
-          $imagePath = $request->file('image')->store('services', 'public');
-  
-          Service::create([
-              'title' => $request->title,
-              'description' => $request->description,
-              'image' => $imagePath,
-          ]);
-  
-          return redirect()->route('admin.services.index')->with('success', 'Service created successfully!');
-      }
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $imageName = time() . '.' . $request->image->extension();
+    $request->image->move(public_path('uploads/services'), $imageName);
+
+    Service::create([
+        'title' => $request->title,
+        'description' => $request->description,
+        'image' => 'uploads/services/' . $imageName,
+    ]);
+
+    return redirect()->route('admin.services.index')->with('success', 'Service created successfully!');
+}
+
   
       // Admin: Show the form to edit a service
       public function edit($id)
@@ -59,43 +60,46 @@ class ServiceController extends Controller
   
       // Admin: Update a service
       public function update(Request $request, $id)
-      {
-          $request->validate([
-              'title' => 'required|string|max:255',
-              'description' => 'required|string',
-              'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-          ]);
-  
-          $service = Service::findOrFail($id);
-  
-          // Handle image upload if a new image is uploaded
-          if ($request->hasFile('image')) {
-              // Delete the old image if it exists
-              Storage::delete('public/' . $service->image);
-  
-              // Store the new image
-              $imagePath = $request->file('image')->store('services', 'public');
-              $service->image = $imagePath;
-          }
-  
-          $service->update([
-              'title' => $request->title,
-              'description' => $request->description,
-          ]);
-  
-          return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');
-      }
+{
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
+
+    $service = Service::findOrFail($id);
+
+    if ($request->hasFile('image')) {
+        if ($service->image && file_exists(public_path($service->image))) {
+            unlink(public_path($service->image));
+        }
+
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/services'), $imageName);
+        $service->image = 'uploads/services/' . $imageName;
+    }
+
+    $service->update([
+        'title' => $request->title,
+        'description' => $request->description,
+    ]);
+
+    return redirect()->route('admin.services.index')->with('success', 'Service updated successfully!');
+}
+
   
       // Admin: Delete a service
       public function destroy($id)
-      {
-          $service = Service::findOrFail($id);
-  
-          // Delete the image from storage
-          Storage::delete('public/' . $service->image);
-  
-          $service->delete();
-  
-          return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully!');
-      }
+{
+    $service = Service::findOrFail($id);
+
+    if ($service->image && file_exists(public_path($service->image))) {
+        unlink(public_path($service->image));
+    }
+
+    $service->delete();
+
+    return redirect()->route('admin.services.index')->with('success', 'Service deleted successfully!');
+}
+
 }

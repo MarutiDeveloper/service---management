@@ -14,12 +14,12 @@
                 </p>
             </div>
             <div class="row">
-                @foreach($services as $service)
+            @foreach($services as $service)
                     <div class="col-md-4">
                         <div class="box" style="background: #fff; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
                             <div class="img-box" style="margin-bottom: 15px;">
                                 <!-- Accessing the image of each service correctly -->
-                                <img src="{{ asset('./assets/storage/' . $service->image) }}" alt="{{ $service->title }}" style="max-width: 100px;">
+                                <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" style="max-width: 100px;">
 
                             </div>
                             <div class="detail-box">

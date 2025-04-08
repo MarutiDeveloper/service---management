@@ -6,7 +6,6 @@ use App\Models\CompanyProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-
 class CompanyProfileController extends Controller
 {
     // Display the company profile form
@@ -45,16 +44,18 @@ class CompanyProfileController extends Controller
         ]);
 
         // Handle the company logo upload
+        
         if ($request->hasFile('company_logo')) {
-            // Delete the old logo if it exists
-            if ($companyProfile->company_logo) {
-                Storage::delete('public/' . $companyProfile->company_logo);
+            // Delete old image
+            if ($companyProfile->company_logo && file_exists(public_path($companyProfile->company_logo))) {
+                unlink(public_path($companyProfile->company_logo));
             }
 
-            // Save the new logo
-            $path = $request->file('company_logo')->store('company_logos', 'public');
-            $companyProfile->company_logo = $path;
+            $imageName = time() . '.' . $request->company_logo->extension();
+            $request->company_logo->move(public_path('uploads/company_logos'), $imageName);
+            $companyProfile->company_logo = 'uploads/company_logos/' . $imageName;
         }
+
 
         // Update the rest of the company profile details
         $companyProfile->company_name = $request->company_name;
@@ -74,4 +75,3 @@ class CompanyProfileController extends Controller
         return redirect()->route('admin.company-profile.index')->with('success', 'Profile updated successfully!');
     }
 }
-
