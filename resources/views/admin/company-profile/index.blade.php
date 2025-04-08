@@ -39,9 +39,10 @@
                         <i class="fas fa-image"></i> Company Logo
                     </label>
                     <input type="file" name="company_logo" id="company_logo" class="form-control">
-                    @if(isset($companyProfile->company_logo) && $companyProfile->company_logo)
-                        <img src="{{ asset('storage/' . $companyProfile->company_logo) }}" class="mt-2 rounded shadow"
-                            width="100" alt="Company Logo">
+                    @if($companyProfile->company_logo)
+                        <img src="{{ asset($companyProfile->company_logo) }}" width="100" alt="Company Logo">
+                    @else
+                        <p>No Logo Available</p>
                     @endif
                 </div>
 

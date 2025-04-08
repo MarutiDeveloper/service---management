@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Team;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class TeamController extends Controller
@@ -22,7 +21,6 @@ class TeamController extends Controller
 
     public function store(Request $request)
     {
-        // Validate the incoming request data
         $request->validate([
             'name' => 'required|string',
             'designation' => 'required|string',
@@ -34,14 +32,13 @@ class TeamController extends Controller
             'youtube' => 'nullable|url',
         ]);
 
-        // Store the image and get the path
-        $imagePath = $request->file('image')->store('team', 'public');
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/team'), $imageName);
 
-        // Create the new team member
         Team::create([
             'name' => $request->name,
             'designation' => $request->designation,
-            'image' => $imagePath,
+            'image' => 'uploads/team/' . $imageName,
             'facebook' => $request->facebook,
             'twitter' => $request->twitter,
             'linkedin' => $request->linkedin,
@@ -60,7 +57,6 @@ class TeamController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Validate the incoming request data
         $request->validate([
             'name' => 'required|string',
             'designation' => 'required|string',
@@ -74,25 +70,26 @@ class TeamController extends Controller
 
         $team = Team::findOrFail($id);
 
-        // If an image is uploaded, store it and update the image path
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('team', 'public');
-            // Delete the old image if exists
-            if ($team->image && Storage::exists('public/' . $team->image)) {
-                Storage::delete('public/' . $team->image);
+            // Delete old image
+            if ($team->image && file_exists(public_path($team->image))) {
+                unlink(public_path($team->image));
             }
-            $team->image = $imagePath;
+
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/team'), $imageName);
+            $team->image = 'uploads/team/' . $imageName;
         }
 
-        // Update other fields
-        $team->name = $request->name;
-        $team->designation = $request->designation;
-        $team->facebook = $request->facebook;
-        $team->twitter = $request->twitter;
-        $team->linkedin = $request->linkedin;
-        $team->instagram = $request->instagram;
-        $team->youtube = $request->youtube;
-        $team->save();
+        $team->update([
+            'name' => $request->name,
+            'designation' => $request->designation,
+            'facebook' => $request->facebook,
+            'twitter' => $request->twitter,
+            'linkedin' => $request->linkedin,
+            'instagram' => $request->instagram,
+            'youtube' => $request->youtube,
+        ]);
 
         return redirect()->route('admin.team.index')->with('success', 'Team member updated successfully');
     }
@@ -101,9 +98,8 @@ class TeamController extends Controller
     {
         $team = Team::findOrFail($id);
 
-        // Delete the image file from storage if exists
-        if ($team->image && Storage::exists('public/' . $team->image)) {
-            Storage::delete('public/' . $team->image);
+        if ($team->image && file_exists(public_path($team->image))) {
+            unlink(public_path($team->image));
         }
 
         $team->delete();

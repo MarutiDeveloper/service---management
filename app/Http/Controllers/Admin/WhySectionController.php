@@ -27,12 +27,14 @@ class WhySectionController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $imagePath = $request->file('image')->store('why_images', 'public');
+        // Handle image upload manually
+        $imageName = time() . '.' . $request->image->extension();
+        $request->image->move(public_path('uploads/why_images'), $imageName);
 
         WhySection::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $imagePath,
+            'image' => 'uploads/why_images/' . $imageName,
         ]);
 
         return redirect()->route('admin.why.index')->with('success', 'Section added successfully');
@@ -55,14 +57,19 @@ class WhySectionController extends Controller
         $whySection = WhySection::findOrFail($id);
 
         if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('why_images', 'public');
-            $whySection->image = $imagePath;
+            // Delete old image
+            if (file_exists(public_path($whySection->image))) {
+                unlink(public_path($whySection->image));
+            }
+
+            $imageName = time() . '.' . $request->image->extension();
+            $request->image->move(public_path('uploads/why_images'), $imageName);
+            $whySection->image = 'uploads/why_images/' . $imageName;
         }
 
-        $whySection->update([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        $whySection->title = $request->title;
+        $whySection->description = $request->description;
+        $whySection->save();
 
         return redirect()->route('admin.why.index')->with('success', 'Section updated successfully');
     }
@@ -71,9 +78,9 @@ class WhySectionController extends Controller
     {
         $whySection = WhySection::findOrFail($id);
 
-        // Delete image from storage
-        if ($whySection->image) {
-            \Storage::delete('public/' . $whySection->image);
+        // Delete image from public folder
+        if ($whySection->image && file_exists(public_path($whySection->image))) {
+            unlink(public_path($whySection->image));
         }
 
         $whySection->delete();

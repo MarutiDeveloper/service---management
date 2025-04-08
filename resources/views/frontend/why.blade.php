@@ -8,10 +8,10 @@
             <h2>Why Choose <span>Us</span></h2>
         </div>
         <div class="why_container">
-            @foreach($whySections as $section)
+        @foreach($whySections as $section)
                 <div class="box">
                     <div class="img-box">
-                        <img src="{{ asset('./assets/storage/' . $section->image) }}" alt="">
+                        <img src="{{ asset($section->image) }}" alt="">
                     </div>
                     <div class="detail-box">
                         <h5>{{ $section->title }}</h5>

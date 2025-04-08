@@ -12,7 +12,6 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
   <link rel="shortcut icon" href="{{ asset('assets/frontend-2/images/favicon.png')}}" type="">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
   <title> Service Management </title>
 
@@ -34,8 +33,6 @@
   <link href="{{ asset('assets/frontend-2/css/style.css')}}" rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{ asset('assets/frontend-2/css/responsive.css')}}" rel="stylesheet" />
-
-
 
   <style>
     /* Custom styling for title */
@@ -110,9 +107,13 @@
           <a class="navbar-brand" href="{{ url('/') }}">
             @foreach ($companyProfile as $Profile)
           @if(!empty($Profile->company_logo))
-        <img src="{{ asset('storage/' . $Profile->company_logo) }}" alt="Company Logo" style="max-height: 50px;">
+        <img src="{{ asset($Profile->company_logo) }}" alt="Company Logo" style="max-height: 50px;">
       @endif
-          <span>{{ $Profile->company_name }}</span>
+      @if (!empty($Profile->company_name))
+        <span>{{ $Profile->company_name }}</span>
+      
+      @endif
+          
           </a>
         @endforeach
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

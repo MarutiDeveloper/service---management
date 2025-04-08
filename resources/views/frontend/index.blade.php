@@ -84,8 +84,8 @@
         </div>
         <div class="col-md-6">
           <div class="img-box">
-          <img src="{{ asset('./assets/frontend-2/images/slider/whatsapp-chatbot-3.png')}}"
-            alt="Business Automation Chatbot">
+          <img src="{{ asset('./assets/frontend-2/images/slider/whatsapp-chatbot-3.png') }}"
+            alt="Business Automation Chatbot" style="width: 300px; height: 300px; object-fit: cover;">
           </div>
         </div>
         </div>
@@ -107,11 +107,11 @@
     <div class="service_container">
     <div class="container">
       <div class="heading_container heading_center">
-      <h2 style="font-size: 32px; font-weight: bold;">
+      <h2 style="font-size: 32px; font-weight: bold; color: orange;">
         Our <span> Services</span>
       </h2>
-      <p style="font-size: 18px;">
-        Enhance customer engagement and automate responses with our powerful WhatsApp chatbot solutions.
+      <p style="font-size: 18px; color: orange;">
+        <strong>Enhance customer engagement and automate responses with our powerful WhatsApp chatbot solutions.</strong>
       </p>
       </div>
       <div class="row">
@@ -121,8 +121,7 @@
       style="background: #fff; padding: 30px; border-radius: 10px; text-align: center; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);">
       <div class="img-box" style="margin-bottom: 15px;">
         <!-- Accessing the image of each service correctly -->
-        <img src="{{ asset('./assets/storage/' . $service->image) }}" alt="{{ $service->title }}"
-        style="max-width: 100px;">
+        <img src="{{ asset($service->image) }}" alt="{{ $service->title }}" style="max-width: 100px;">
 
       </div>
       <div class="detail-box">
@@ -159,17 +158,27 @@
     <div class="row">
       <div class="col-md-6">
       <div class="img-box">
-      <img src="{{ asset('./assets/storage/' . $about->image) }}" alt="WhatsApp Chatbot">
+      @if(!empty($about->image))
+      <img src="{{ asset(path: $about->image) }}" alt="WhatsApp Chatbot">
+    @else
+      <span class="text-muted">No Image</span>
+    @endif
       </div>
       </div>
       <div class="col-md-6">
       <div class="detail-box">
+      @if (!empty($about->title))
       <h3 class="mb-2">{{ $about->title }}</h3>
+    @endif
+      @if (!empty($about->description))
+
+
       <hr class="my-3" style="background-color: white;">
-      <p class="typing-effect"
-      style="font-family: 'Times New Roman', Times, serif; font-size: larger; font-weight: bold;">
+
+      <p style="font-family: 'Times New Roman', Times, serif; font-size: larger; font-weight: bold;">
       {{ $about->description }}
       </p>
+    @endif
       <a href="">
       Learn More
       </a>
@@ -195,7 +204,7 @@
       @foreach($whySections as $section)
       <div class="box">
       <div class="img-box">
-      <img src="{{ asset('./assets/storage/' . $section->image) }}" alt="">
+      <img src="{{ asset($section->image) }}" alt="">
       </div>
       <div class="detail-box">
       <h5>{{ $section->title }}</h5>
@@ -229,7 +238,7 @@
       <div class="col-lg-3 col-sm-6">
       <div class="box ">
       <div class="img-box">
-        <img src="{{ asset('./assets/storage/' . $team->image) }}" class="img1" alt="{{ $team->name }}">
+        <img src="{{ asset($team->image) }}" class="img1" alt="{{ $team->name }}">
       </div>
       <div class="detail-box">
         <h5>
@@ -265,9 +274,7 @@
       <div class="item">
       <div class="box">
       <div class="img-box">
-        <img
-        src="{{ asset($client->image ? 'assets/images/clients/' . $client->image : 'images/clients/default-client.jpg') }}"
-        alt="{{ $client->name }}" class="box-img">
+        <img src="{{ asset($client->image) }}" alt="{{ $client->name }}" class="box-img">
       </div>
       <div class="detail-box">
         <div class="client_id">

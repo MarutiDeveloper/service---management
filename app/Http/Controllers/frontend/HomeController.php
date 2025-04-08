@@ -34,8 +34,9 @@ class HomeController extends Controller
         $teams = Team::all();
         $whySections = WhySection::all();
         $services = Service::all();
-        $companyProfile = CompanyProfile::all(); // Retrieve the first profile
-        $aboutus = Aboutus::all(); // Retrieve the first about us
-        return view('frontend.index', compact('clients', 'teams', 'whySections', 'services', 'companyProfile', 'aboutus'));
+        $companyProfile = CompanyProfile::all();
+        $aboutus = Aboutus::all();
+        return view('frontend.index', compact('clients', 'teams', 'whySections', 'services', 'companyProfile','aboutus'));
     }
+
 }

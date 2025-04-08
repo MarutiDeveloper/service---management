@@ -47,7 +47,7 @@
 
                 @if($aboutus->image)
                     <div class="mt-3">
-                        <img src="{{ asset('storage/' . $aboutus->image) }}" alt="About Image" class="rounded-circle shadow"
+                        <img src="{{ asset( $aboutus->image) }}" alt="About Image" class="rounded-circle shadow"
                             style="max-width: 100px;">
                     </div>
                 @endif
