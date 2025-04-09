@@ -139,11 +139,11 @@
                         <div class="col-md-6 text-muted"
                             style="font-family: 'Times New Roman', Times, serif ;font-weight: bolder ; ">
                             <div class="mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option value="1" style="font-family: 'Times New Roman', Times, serif;">Active
+                                <label for="role">User Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="Admin" style="font-family: 'Times New Roman', Times, serif;"><strong>Admin</strong>
                                     </option>
-                                    <option value="0" style="font-family: 'Times New Roman', Times, serif;">Block
+                                    <option value="customer" style="font-family: 'Times New Roman', Times, serif;"><strong>Customer</strong>
                                     </option>
                                 </select>
                             </div>

@@ -59,6 +59,12 @@
                                 <p>Manage Clients </p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('users.index')}}" class="nav-link">
+                                <i class="far fa-user nav-icon"></i>
+                                <p>Manage Users </p>
+                            </a>
+                        </li>
 
                         <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
@@ -79,12 +85,12 @@
                                 <p>Booking Appoinment</p>
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a href="#" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Manage Footer</p>
                             </a>
-                        </li>
+                        </li> -->
                         
                         <li class="nav-item">
                             <a href="{{ route('admin.about.index') }}" class="nav-link">
@@ -114,36 +120,36 @@
             </a>
         </li> -->
                 <!-- Multiple Branch -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-code-branch"></i>
                         <p>Multiple Branch</p>
                     </a>
-                </li>
+                </li> -->
 
 
                 <!-- Messages -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-envelope"></i>
                         <p>Messages</p>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- Users -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Employee</p>
                     </a>
-                </li>
+                </li> -->
                 <!-- Pages -->
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>Pages</p>
                     </a>
-                </li>
+                </li> -->
                 <!-- Manage Footer -->
                 <!-- <li class="nav-item">
             <a href="#" class="nav-link">

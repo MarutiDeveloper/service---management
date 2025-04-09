@@ -195,7 +195,12 @@ Route::prefix('admin')->group(function () {
         // ------------------------------------
         // User Management Routes
         // ------------------------------------
-        Route::resource('users', UserController::class)->except(['show']);
+        Route::get('/users', [UserController::class, 'index'])->name('users.index');
+        Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/users', [UserController::class, 'store'])->name('users.store');
+        Route::get('/users/{users}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('/users/{users}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/users/{users}', [UserController::class, 'destroy'])->name('users.destroy');
 
         // ------------------------------------
         // Pages Management Routes
