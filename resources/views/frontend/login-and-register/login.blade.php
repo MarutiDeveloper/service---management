@@ -68,6 +68,8 @@
                 <a href="#" class="forget">Forget Password</a>
                 <!-- Forget Password -->
                 <a href="{{ route('account.register') }}" class="registration">Registration</a>
+                   <!-- Admin Login Link -->
+                   <a href="{{ route('admin.login') }}" class="registration"><strong>Are You have a Admin Access ? Login</strong> </a>
             </div>
         </form>
         <!-- /end login form -->

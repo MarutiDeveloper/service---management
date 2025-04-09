@@ -141,13 +141,13 @@
 
                         <div class="col-md-6 text-muted">
                             <div class="mb-3">
-                                <label for="status">Status</label>
-                                <select name="status" id="status" class="form-control">
-                                    <option {{ ($user->status == 1) ? 'selected' : '' }} value="1"
-                                        style="font-family: 'Times New Roman', Times, serif;">Active
+                                <label for="status">Role</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option {{ ($user->role == 'Admin') ? 'selected' : '' }} value="Admin"
+                                        style="font-family: 'Times New Roman', Times, serif;">Admin
                                     </option>
-                                    <option {{ ($user->status == 0) ? 'selected' : '' }} value="0"
-                                        style="font-family: 'Times New Roman', Times, serif;">Block
+                                    <option {{ ($user->role == 'customer') ? 'selected' : '' }} value="customer"
+                                        style="font-family: 'Times New Roman', Times, serif;">Customer
                                     </option>
                                 </select>
                             </div>

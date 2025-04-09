@@ -2,7 +2,12 @@
 
 @section('content')
     <div class="container">
-        <h2 class="mb-4">Create About Us</h2>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-plus-circle me-2"></i>Create About Us</h2>
+            <a href="{{ route('admin.about.index') }}" class="btn btn-secondary">
+                <i class="fas fa-arrow-left me-1"></i> Back
+            </a>
+        </div>
 
         @if ($errors->any())
             <div class="alert alert-danger">
@@ -39,14 +44,21 @@
             <div class="mb-4">
                 <label for="image" class="form-label">Image</label>
                 <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image"
-                    accept=".jpg,.jpeg,.png,.gif">
+                    accept="image/*" onchange="previewImage(event)" required>
+
+                <!-- Preview Image -->
+                <div class="mt-3 text-center">
+                    <img id="preview" src="#" alt="Image Preview" style="max-width: 150px; display: none;"
+                        class="img-thumbnail shadow-sm rounded">
+                </div>
                 @error('image')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
             </div>
 
-            <button type="submit" class="btn btn-success">Create</button>
-            <a href="{{ route('admin.about.index') }}" class="btn btn-secondary ms-2">Back</a>
+            <button type="submit" class="btn btn-success">
+                <i class="fas fa-save me-1"></i> Create
+            </button>
         </form>
     </div>
 @endsection

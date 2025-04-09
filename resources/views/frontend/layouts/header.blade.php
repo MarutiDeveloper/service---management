@@ -107,7 +107,7 @@
           <a class="navbar-brand" href="{{ url('/') }}">
             @foreach ($companyProfile as $Profile)
           @if(!empty($Profile->company_logo))
-        <img src="{{ asset($Profile->company_logo) }}" alt="Company Logo" style="max-height: 50px;">
+        <img class="rounded-circle bg-light" src="{{ asset($Profile->company_logo) }}" alt="Company Logo" style="max-height: 50px;">
       @endif
       @if (!empty($Profile->company_name))
         <span>{{ $Profile->company_name }}</span>
